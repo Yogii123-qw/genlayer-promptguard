@@ -52,7 +52,7 @@
 ## Alamat / hash
 - Studio deploy: belum ada (menunggu browser task)
 - Repo GitHub: https://github.com/Yogii123-qw/genlayer-promptguard
-- Commit: 857eb12 (master, terverifikasi di remote)
+- Commit: bb541a7 (master, terverifikasi di remote)
 
 ## Perapian 22 Nov 2026
 - .gitignore diperluas: *.log, logs/, .genlayer/, .env*.
