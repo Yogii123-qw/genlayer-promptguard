@@ -12,6 +12,10 @@ Second, text that passes the first check goes to the language model. The prompt 
 
 Each screen updates the counters read by get_stats, so a caller can see how many checks ran and how many came back suspicious or malicious.
 
+## What this is, and what it is not
+
+PromptGuard is not a single prompt wrapper. Screening combines four parts that each do a different job. First, a deterministic on-chain heuristic runs before any model call: the fixed blocked phrase list catches known instruction override, extraction, jailbreak, and forced outcome patterns at zero model cost. Second, text that passes the list goes to the model classifier, and the validator re-runs that classification itself and accepts it only when the verdict matches exactly and the confidence gap is at most 15 points, so agreement comes from two independent model runs, not one call. Third, batch classification screens up to 10 texts in one call, each with its own validator check. Fourth, every completed screen updates on-chain counters read by get_stats, so the record of what was caught is auditable from state instead of from logs. A caller that needs only a keyword list can use the first part alone; a caller that needs judgment on subtle text gets the full chain.
+
 ## Consensus: the custom validator
 
 A plain string comparison cannot work here. Two validators that ask the same model the same question can get the same verdict with different confidence numbers, and a strict check would fail consensus on honest answers. The contract uses `gl.vm.run_nondet_unsafe` with a custom validator, the pattern the GenLayer docs call the default choice for non-deterministic work.
@@ -45,6 +49,19 @@ The tests use genlayer-test in Direct Mode with mocked model responses. Install 
 `pytest tests/test_promptguard.py -q`
 
 The test file swaps only the contract header to a locally available SDK pin. The shipped contract itself targets Studio-next, and that header stays untouched. `gl.vm.run_nondet_unsafe` and `gl.nondet.exec_prompt` are both present in the local bundle, so the custom validator path runs locally too: the leader runs through mocked model calls, and the captured validator is re-run with changed mocks to prove it accepts a confidence gap inside 15 points and rejects a gap outside it, and rejects a verdict mismatch.
+
+## Verification & Test Results
+
+Local tests run in genlayer-test Direct Mode with mocked model responses. The suite has 25 cases and all 25 pass. Coverage: clean text, obvious injection blocked before any model call, case-insensitive blocked patterns with no model mock at all, subtle injection caught by the model, benign text with a dangerous word judged clean, suspicious verdict and stats, empty and oversized input, bad model output (garbage, bad verdict, bad confidence, missing reason), the validator band (accepts a 12 point confidence gap, accepts exactly 15, rejects 16, rejects a verdict mismatch, rejects a lying leader, agrees on a shared expected error), batch screening of mixed texts, and batch input guards.
+
+## Live Deployment Proof (GenLayer Studio)
+
+Network: TBD (GenLayer Studio)
+Contract Address: TBD
+Deployment Transaction Hash: TBD
+Consensus Execution Proof: TBD (FINALIZED transaction hash)
+
+No live deployment exists yet. These slots are filled in after the Studio deploy and a FINALIZED write transaction are verified on the Explorer.
 
 ## Deploy it on Studio
 

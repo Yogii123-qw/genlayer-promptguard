@@ -54,6 +54,11 @@
 - Repo GitHub: https://github.com/Yogii123-qw/genlayer-promptguard
 - Commit: 857eb12 (master, terverifikasi di remote)
 
+## Perapian 22 Nov 2026
+- .gitignore diperluas: *.log, logs/, .genlayer/, .env*.
+- README ditambah bagian Verification & Test Results dan Live Deployment Proof (GenLayer Studio) dengan slot TBD, plus paragraf positioning "What this is, and what it is not" yang menjelaskan empat bagian: pre-filter pola deterministik tanpa panggilan model, klasifikasi model dengan validator dua putaran, batch classification, dan statistik audit on-chain.
+- Kontrak tidak diubah; tes lokal diulang: 25/25 lolos.
+
 ## Langkah berikutnya
 1. Serahkan ke induk untuk uji deploy Studio lewat cloud browser (akun dev Studio, bukan wallet Monch). Tempel kontrak, deploy tanpa argumen konstruktor, panggil screen dengan teks bersih dan teks injeksi sampai ada transaksi ACCEPTED dan consensus tercapai. Catat alamat kontrak dan tx hash.
 2. Setelah deploy Studio terverifikasi, serahkan draf submission ke Monch untuk disetujui. JANGAN submit ke Portal tanpa itu.
