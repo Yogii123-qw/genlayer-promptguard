@@ -1,11 +1,10 @@
-# v0.4.0
-# { "Depends": "py-genlayer:kzybg95x1gn21dw72m7hyg0maaap04n4nx55j9yt6fkdqxtz6bz0" }
+# v0.2.16
+# { "Depends": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6" }
+
+from genlayer import *
 
 import json
 import typing
-
-import genlayer as gl
-from genlayer.types import *
 
 
 MAX_TEXT_LEN = 2000
@@ -151,7 +150,7 @@ def _handle_leader_error(leaders_res, leader_fn) -> bool:
         return False
 
 
-class PromptGuard(gl.contract.Contract):
+class PromptGuard(gl.Contract):
     total_checks: u256
     suspicious_count: u256
     malicious_count: u256

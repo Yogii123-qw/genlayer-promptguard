@@ -1,7 +1,7 @@
 # STATE.md - PromptGuard (GenLayer Intelligent Contract)
 
 ## Status saat ini
-- Fase: kode selesai, uji lokal LULUS 25/25, lint LULUS (3 checks), review akhir Groq selesai. Repo dibuat dan di-push. Studio deploy BELUM dilakukan (butuh browser task induk).
+- Fase: kode ditulis ulang ke gaya lama 22 Nov 2026 (header # v0.2.16, pin 1jb45aa8, gl.Contract) sesudah Studio menolak pin v0.4.0; uji lokal LULUS 25/25 atas file kirim yang byte-identik, tanpa swap. Repo dibuat dan di-push. Studio deploy BELUM dilakukan (butuh browser task induk).
 - JANGAN SUBMIT ke portal GenLayer tanpa persetujuan Monch.
 
 ## SOP dan skill yang dibaca utuh sebelum kerja
@@ -28,7 +28,7 @@
 
 ## Uji lokal (genlayer-test Direct Mode, 22 Nov 2026)
 - 25/25 LULUS dalam 0,90 detik. Cakupan: get_stats awal nol, teks bersih, injeksi jelas dicegat pola tolak sebelum LLM (mock yang menjawab clean tetap kalah oleh pola), pola tolak case-insensitive tanpa mock sama sekali (membuktikan tidak ada panggilan model), injeksi halus tertangkap model, kata kunci berbahaya dalam konteks sah dinilai bersih, suspicious tercatat di stats, teks kosong revert, teks terlalu panjang revert, model mengembalikan bukan JSON revert, verdict tidak valid revert, confidence di luar 0-100 revert, reason hilang revert, validator menerima hasil sama, validator menerima selisih confidence 12 dan 15 (batas inklusif), validator menolak selisih 16, validator menolak verdict berbeda, validator menolak leader yang berbohong, validator setuju pada error [EXPECTED] yang sama, validator tidak setuju saat leader error tapi validator sukses, screen_batch campuran (bersih, halus, pola tolak) dengan urutan dan stats benar plus kedua validator batch True, batch kosong revert, batch 11 item revert, batch berisi item kosong revert.
-- Batasan uji: kontrak diuji sebagai salinan yang byte-identik kecuali header (pin SDK 1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6, satu-satunya runner di bundle GenVM v0.3.0-rc7) dan dua penyesuaian API era lama (from genlayer import * sebagai ganti from genlayer.types import *, gl.Contract sebagai ganti gl.contract.Contract). Kontrak kirim tetap memakai header v0.4.0 dan pin kzybg95x1gn21dw72m7hyg0maaap04n4nx55j9yt6fkdqxtz6bz0. Bukti deploy Studio tetap menjadi cek otoritatif untuk pin kirim.
+- Batasan uji: kontrak diuji sebagai file kirim yang byte-identik (header # v0.2.16, pin SDK 1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6, satu-satunya runner di bundle GenVM v0.3.0-rc7), tanpa swap header dan tanpa penyesuaian API. Pin ini terbukti bisa di-deploy di Studio pada 22 Nov 2026 (kontrak minimal gaya lama, alamat 0x05534FE75D83950cFE6C5d54486d20366576Ac1D). Bukti deploy Studio atas kontrak ini tetap menjadi cek otoritatif.
 - Batasan uji tambahan: tes memakai respons model mock, bukan model live. Kualitas klasifikasi di Studio bergantung pada model yang dipakai Studio.
 
 ## Lint
