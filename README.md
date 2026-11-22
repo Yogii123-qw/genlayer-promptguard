@@ -56,20 +56,24 @@ Local tests run in genlayer-test Direct Mode with mocked model responses. The su
 
 ## Live Deployment Proof (GenLayer Studio)
 
-Network: TBD (GenLayer Studio)
-Contract Address: TBD
-Deployment Transaction Hash: TBD
-Consensus Execution Proof: TBD (FINALIZED transaction hash)
+Network: GenLayer StudioNet (chain id 61999)
+Contract Address: 0xAc7943dA51278501Ad99A8BcCEB4D6A7229E0E53
+Deployment Transaction Hash: 0xa6f00215fa50da8dd03a3bbfa5ed7f87d1a77720509ec8e4002aa8ca80869859
+Consensus Execution Proof: screen, transaction 0xabd42546661bab133825ba5f4fd73374309fb018fa99b482a1a8843af7c80ff3, FINALIZED, reached consensus
 
-No live deployment exists yet. These slots are filled in after the Studio deploy and a FINALIZED write transaction are verified on the Explorer.
+Verified live read, 22 November 2026: get_stats returns total_checks 1 and malicious 1. The screened text matched the blocked phrase list, so the verdict came back malicious at confidence 95 with no model call spent.
+
+Contract on the Explorer: https://explorer-studio.genlayer.com/address/0xAc7943dA51278501Ad99A8BcCEB4D6A7229E0E53
+Deploy transaction on the Explorer: https://explorer-studio.genlayer.com/tx/0xa6f00215fa50da8dd03a3bbfa5ed7f87d1a77720509ec8e4002aa8ca80869859
+Screen transaction on the Explorer: https://explorer-studio.genlayer.com/tx/0xabd42546661bab133825ba5f4fd73374309fb018fa99b482a1a8843af7c80ff3
 
 ## Deploy it on Studio
 
-Open Studio, create a new Intelligent Contract, paste contracts/promptguard.py, and deploy. The constructor takes no arguments. Then call screen with a test string and read the result, and call get_stats to see the counters move. Deploy is not done yet; it needs a browser session, and this repo does not submit anything on its own.
+Open Studio, create a new Intelligent Contract, paste contracts/promptguard.py, and deploy. The constructor takes no arguments. Then call screen with a test string and read the result, and call get_stats to see the counters move. The contract is deployed; the live deployment proof above records the address and the FINALIZED screen transaction. This repo does not submit anything on its own.
 
 ## Limits, stated plainly
 
-The Studio deploy has not been run yet, so the validator path on live Studio still needs that check. The local tests prove the logic with mocked model responses, not with a live model. Classification quality depends on the model: a subtle attack can slip through as clean, and a harmless text can come back suspicious. The blocked list trades precision for cost: a harmless text that contains a listed phrase is flagged malicious without a model call. That is the price of the cheap first check, and callers that need nuance on those exact phrases should not rely on the list alone. A reverted screen records nothing in the stats, so the counters count completed screens only.
+The Studio deploy is live and one screen reached consensus there. The live screen took the blocked phrase path, so the model classifier path is still proven only by the local tests with mocked model responses, not by a live model run. Classification quality depends on the model: a subtle attack can slip through as clean, and a harmless text can come back suspicious. The blocked list trades precision for cost: a harmless text that contains a listed phrase is flagged malicious without a model call. That is the price of the cheap first check, and callers that need nuance on those exact phrases should not rely on the list alone. A reverted screen records nothing in the stats, so the counters count completed screens only.
 
 ## License
 

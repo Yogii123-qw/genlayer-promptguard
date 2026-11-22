@@ -2,6 +2,7 @@
 
 ## Status saat ini
 - Fase: kode ditulis ulang ke gaya lama 22 Nov 2026 (header # v0.2.16, pin 1jb45aa8, gl.Contract) sesudah Studio menolak pin v0.4.0; uji lokal LULUS 25/25 atas file kirim yang byte-identik, tanpa swap. Repo dibuat dan di-push. Studio deploy BELUM dilakukan (butuh browser task induk).
+- DEPLOY 22 Nov 2026 20:15 WIB + VERIFIKASI 20:40 WIB (browser task induk): kontrak 0xAc7943dA51278501Ad99A8BcCEB4D6A7229E0E53 TIDAK BERUBAH, lolos penuh sejak deploy pertama. Deploy tx 0xa6f00215fa50da8dd03a3bbfa5ed7f87d1a77720509ec8e4002aa8ca80869859. screen tx 0xabd42546661bab133825ba5f4fd73374309fb018fa99b482a1a8843af7c80ff3, FINALIZED, Reached consensus. get_stats: total_checks 1, malicious 1 (confidence 95, jalur pola tolak, tanpa panggilan model).
 - JANGAN SUBMIT ke portal GenLayer tanpa persetujuan Monch.
 
 ## SOP dan skill yang dibaca utuh sebelum kerja
