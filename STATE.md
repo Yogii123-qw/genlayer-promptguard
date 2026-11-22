@@ -52,7 +52,7 @@
 ## Alamat / hash
 - Studio deploy: belum ada (menunggu browser task)
 - Repo GitHub: https://github.com/Yogii123-qw/genlayer-promptguard
-- Commit: (diisi sesudah push)
+- Commit: 857eb12 (master, terverifikasi di remote)
 
 ## Langkah berikutnya
 1. Serahkan ke induk untuk uji deploy Studio lewat cloud browser (akun dev Studio, bukan wallet Monch). Tempel kontrak, deploy tanpa argumen konstruktor, panggil screen dengan teks bersih dan teks injeksi sampai ada transaksi ACCEPTED dan consensus tercapai. Catat alamat kontrak dan tx hash.
